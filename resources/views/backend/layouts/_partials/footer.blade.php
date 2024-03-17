@@ -1,3 +1,20 @@
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> © Osama Sejoal.
+            </div>
+            <div class="col-sm-6">
+                <div class="text-sm-end d-none d-sm-block">
+                    Design & Develop by Themesbrand
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
 
 </div>
 <!-- END layout-wrapper -->
@@ -785,5 +802,18 @@
 
 <!-- App js -->
 <script src="{{ asset('backend') }}/assets/js/app.js"></script>
+
+<!-- Disappear Success Message -->
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {
+            $("#success-alert").fadeOut(300, function(){
+                $(this).remove();
+            });
+        }, 3000);
+    });
+</script>
+
 </body>
+
 </html>
