@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
 class UserProfileController extends Controller
@@ -87,6 +88,39 @@ class UserProfileController extends Controller
         ]);
 
         return back()->with('success', "Successfully updated your data");
+    }
+    // End Method
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                             UPDATE PASSWORD METHOD
+    |--------------------------------------------------------------------------
+    */
+    public function updatePass(Request $request){
+        // Validation Portion
+        $request->validate([
+            'old_pass'              => 'required',
+            'password'              => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ],[
+            '*.required'    => "This field is required",
+            '*.confirmed'   => "Confirm password does not match",
+        ]);
+
+        // Match the old password
+        if (!Hash::check($request->old_pass, auth()->user()->password)) {
+            return back()->with('error', "Old password does not match");
+        }
+
+        // Update new password
+        User::whereId(auth()->id())->update([
+            'password' => Hash::make($request->password),
+            'updated_at' => Carbon::now(),
+        ]);
+
+        return back()->with('success', 'Successfully updated your password');
     }
     // End Method
 }

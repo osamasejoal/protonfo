@@ -102,12 +102,6 @@
                             <div class="card-body p-4">
                                 <div class="tab-content">
 
-                                    <!-- Success alert -->
-                                    @if (session('success'))
-                                        <div id="success-alert" class="alert alert-success text-center">
-                                            {{ session('success') }}</div>
-                                    @endif
-
                                     <!-- Personal Details -->
                                     <div class="tab-pane active" id="personalDetails" role="tabpanel">
 
@@ -200,128 +194,94 @@
                                             <!-- End Image -->
 
 
-                                            <div class="text-end">
+                                            <div class="text-center mt-5">
                                                 <button type="submit" class="btn btn-primary">Update</button>
                                             </div>
                                         </form>
                                     </div>
                                     <!-- End Personal Details -->
 
+
                                     <!-- Change Password -->
                                     <div class="tab-pane" id="changePassword" role="tabpanel">
-                                        <form action="javascript:void(0);">
+                                        <form action="{{ route('user.password.update') }}" method="POST">
+                                            @csrf
+
                                             <div class="row g-2">
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <label for="oldpasswordInput" class="form-label">Old
-                                                            Password*</label>
-                                                        <input type="password" class="form-control" id="oldpasswordInput"
-                                                            placeholder="Enter current password">
+
+                                                <!-- Old Password -->
+                                                <div class="row mb-4 m-auto">
+                                                    <div class="col-lg-3">
+                                                        <label for="old_pass" class="form-label">Old Password</label>
                                                     </div>
-                                                </div>
-                                                <!--end col-->
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <label for="newpasswordInput" class="form-label">New
-                                                            Password*</label>
-                                                        <input type="password" class="form-control" id="newpasswordInput"
-                                                            placeholder="Enter new password">
+                                                    <div class="col-lg-9">
+                                                        <input type="password" name="old_pass" id="old_pass"
+                                                            class="form-control @error('old_pass') is-invalid @enderror">
+
+                                                        @error('old_pass')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+
+                                                        @if (session('error'))
+                                                            <span class="text-danger">{{ session('error') }}</span>
+                                                        @endif
+
                                                     </div>
-                                                </div>
-                                                <!--end col-->
-                                                <div class="col-lg-4">
-                                                    <div>
-                                                        <label for="confirmpasswordInput" class="form-label">Confirm
-                                                            Password*</label>
-                                                        <input type="password" class="form-control"
-                                                            id="confirmpasswordInput" placeholder="Confirm password">
+                                                </div> <!-- End Old Password -->
+
+                                                <!-- New Password -->
+                                                <div class="row mb-4 m-auto">
+                                                    <div class="col-lg-3">
+                                                        <label for="new_pass" class="form-label">New Password</label>
                                                     </div>
-                                                </div>
-                                                <!--end col-->
+                                                    <div class="col-lg-9">
+                                                        <input type="password" name="password" id="new_pass"
+                                                            class="form-control @error('password') is-invalid @enderror">
+
+                                                        @error('password')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div> <!-- End New Password -->
+
+                                                <!-- Confirm Password -->
+                                                <div class="row mb-4 m-auto">
+                                                    <div class="col-lg-3">
+                                                        <label for="confirm_pass" class="form-label">Confirm
+                                                            Password</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <input type="password" name="password_confirmation"
+                                                            class="form-control" id="confirm_pass">
+
+                                                        @error('password_confirmation')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div> <!-- End Confirm Password -->
+
+                                                <!-- Forgot Password -->
                                                 <div class="col-lg-12">
-                                                    <div class="mb-3">
+                                                    <div class="mb-3 text-end">
                                                         <a href="javascript:void(0);"
                                                             class="link-primary text-decoration-underline">Forgot
                                                             Password ?</a>
                                                     </div>
                                                 </div>
-                                                <!--end col-->
+                                                <!-- End Forgot Password -->
+
                                                 <div class="col-lg-12">
-                                                    <div class="text-end">
+                                                    <div class="text-center">
                                                         <button type="submit" class="btn btn-primary">Change
                                                             Password</button>
                                                     </div>
                                                 </div>
                                                 <!--end col-->
+
                                             </div>
                                             <!--end row-->
+
                                         </form>
-                                        <div class="mt-4 mb-3 border-bottom pb-2">
-                                            <div class="float-end">
-                                                <a href="javascript:void(0);" class="link-secondary">All Logout</a>
-                                            </div>
-                                            <h5 class="card-title">Login History</h5>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="flex-shrink-0 avatar-sm">
-                                                <div class="avatar-title bg-light text-primary rounded-3 fs-18">
-                                                    <i class="ri-smartphone-line"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6>iPhone 12 Pro</h6>
-                                                <p class="text-muted mb-0">Los Angeles, United States - March 16 at
-                                                    2:47PM</p>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="link-secondary">Logout</a>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="flex-shrink-0 avatar-sm">
-                                                <div class="avatar-title bg-light text-primary rounded-3 fs-18">
-                                                    <i class="ri-tablet-line"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6>Apple iPad Pro</h6>
-                                                <p class="text-muted mb-0">Washington, United States - November 06
-                                                    at 10:43AM</p>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="link-secondary">Logout</a>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="flex-shrink-0 avatar-sm">
-                                                <div class="avatar-title bg-light text-primary rounded-3 fs-18">
-                                                    <i class="ri-smartphone-line"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6>Galaxy S21 Ultra 5G</h6>
-                                                <p class="text-muted mb-0">Conneticut, United States - June 12 at
-                                                    3:24PM</p>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="link-secondary">Logout</a>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-shrink-0 avatar-sm">
-                                                <div class="avatar-title bg-light text-primary rounded-3 fs-18">
-                                                    <i class="ri-macbook-line"></i>
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h6>Dell Inspiron 14</h6>
-                                                <p class="text-muted mb-0">Phoenix, United States - July 26 at
-                                                    8:10AM</p>
-                                            </div>
-                                            <div>
-                                                <a href="javascript:void(0);" class="link-secondary">Logout</a>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- End Change Password -->
 

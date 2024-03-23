@@ -803,16 +803,26 @@
 <!-- App js -->
 <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
-<!-- Disappear Success Message -->
-<script>
-    $(document).ready(function(){
-        setTimeout(() => {
-            $("#success-alert").fadeOut(300, function(){
-                $(this).remove();
-            });
-        }, 3000);
-    });
-</script>
+<!-- IZI Toast -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js" type="text/javascript"></script>
+
+@if (session()->get('success'))
+    <script>
+        iziToast.success({
+            title: "{{ session('success') }}",
+            titleSize: '16',
+            animateInside: true,
+            timeout: 5000,
+            position: 'topRight',
+            pauseOnHover: true,
+            transitionIn: 'fadeInUp',
+            transitionOut: 'fadeOut',
+            transitionInMobile: 'fadeInUp',
+            transitionOutMobile: 'fadeOutDown',
+            // message: 'What would you like to add?'
+        });
+    </script>
+@endif
 
 </body>
 

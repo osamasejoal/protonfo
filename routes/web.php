@@ -76,3 +76,4 @@ Route::get('/', [FrontendController::class, 'frontpage'])->name('frontpage');
 */
 Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');
 Route::post('/user/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
+Route::post('/user/password/update', [UserProfileController::class, 'updatePass'])->name('user.password.update');
