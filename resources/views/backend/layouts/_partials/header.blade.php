@@ -32,6 +32,9 @@
     <!-- IZI Toast -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
 
+    <!-- Yield for header content -->
+    @yield('header-content')
+
 </head>
 
 <body>

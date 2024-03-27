@@ -1,13 +1,6 @@
 @extends('backend.layouts.master')
 
 @section('main-content')
-    <!-- ============================================================== -->
-    <!-- Start right Content here -->
-    <!-- ============================================================== -->
-    <div class="main-content">
-
-        <div class="page-content">
-            <div class="container-fluid">
 
                 <div class="row">
                     <div class="col">
@@ -1004,8 +997,5 @@
                     </div> <!-- end col -->
                 </div>
 
-            </div>
-            <!-- container-fluid -->
-        </div>
-        <!-- End Page-content -->
+            
     @endsection

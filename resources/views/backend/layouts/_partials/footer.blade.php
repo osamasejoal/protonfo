@@ -1,3 +1,8 @@
+</div>
+<!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+
 <footer class="footer">
     <div class="container-fluid">
         <div class="row">
@@ -823,6 +828,9 @@
         });
     </script>
 @endif
+
+<!-- Yield for footer content -->
+@yield('footer-content')
 
 </body>
 

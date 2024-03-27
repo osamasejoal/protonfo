@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -15,7 +16,8 @@ class FrontendController extends Controller
     |--------------------------------------------------------------------------
     */
     public function frontpage(){
-        return view('frontend.index');
+        $banner = Banner::firstOrFail();
+        return view('frontend.index', compact('banner'));
     }
     //End Method
 }

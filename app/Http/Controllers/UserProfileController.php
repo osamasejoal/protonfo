@@ -15,19 +15,6 @@ class UserProfileController extends Controller
 
     /*
     |--------------------------------------------------------------------------
-    |                             __CONSTRUCT METHOD
-    |--------------------------------------------------------------------------
-    */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    // End Method
-
-
-
-    /*
-    |--------------------------------------------------------------------------
     |                             INDEX METHOD
     |--------------------------------------------------------------------------
     */
@@ -50,13 +37,10 @@ class UserProfileController extends Controller
         // Validation Portion
         $request->validate([
             'name'      => 'required',
-            'email'     => 'required | email',
             'gender'    => 'required | integer',
             'image'     => 'image | mimes:png,jpg,jpeg',
         ], [
             'name.required'     => 'Name is required',
-            'email.required'    => 'Email is required',
-            'email.email'       => 'Please enter a valid email',
             'gender.required'   => 'Gender is required',
             'gender.ineger'     => 'Please enter a valid gender',
             'image.image'       => 'Please choose a image file',
@@ -82,7 +66,6 @@ class UserProfileController extends Controller
         // Update Portion
         User::find(auth()->id())->update([
             'name'          => $request->name,
-            'email'         => $request->email,
             'gender'        => $request->gender,
             'updated_at'    => Carbon::now(),
         ]);

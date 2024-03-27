@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{LoginController, LogoutController, HomeController, FrontendController, UserProfileController};
+use App\Http\Controllers\{LoginController, LogoutController, HomeController, FrontendController, UserProfileController, BannerController};
 
 /*
 |--------------------------------------------------------------------------
@@ -51,12 +51,40 @@ Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 
 
 
-/*
-|--------------------------------------------------------------------------
-|                          HomeController
-|--------------------------------------------------------------------------
-*/
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Middleware('auth')
+Route::middleware('auth')->group(function (){
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                          HomeController
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                          UserProfileController
+    |--------------------------------------------------------------------------
+    */
+    Route::controller(UserProfileController::class)->group(function(){
+        Route::get('/user/profile', 'index')->name('user.profile');
+        Route::post('/user/profile/update', 'update')->name('user.profile.update');
+        Route::post('/user/password/update', 'updatePass')->name('user.password.update');
+    });
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                          BannerController
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('banner', BannerController::class);
+});
 
 
 
@@ -67,13 +95,3 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 */
 Route::get('/', [FrontendController::class, 'frontpage'])->name('frontpage');
 
-
-
-/*
-|--------------------------------------------------------------------------
-|                          UserProfileController
-|--------------------------------------------------------------------------
-*/
-Route::get('/user/profile', [UserProfileController::class, 'index'])->name('user.profile');
-Route::post('/user/profile/update', [UserProfileController::class, 'update'])->name('user.profile.update');
-Route::post('/user/password/update', [UserProfileController::class, 'updatePass'])->name('user.password.update');
